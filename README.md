@@ -2,11 +2,12 @@
 Notes
 -----
 ### Usage
-Requires file named input.xml in root directory
+- Requires file named input.xml in root directory
+- The output file named output.json will be in root directory
+- To run, type in bash:
 ```
 python3 main.py
 ```
-The output file named output.json is in root directory
 
 ### Python version
 Written in Python 3.5
@@ -14,4 +15,5 @@ Written in Python 3.5
 ### Required packages
 None
 
-## 
+### Author
+Krzysztof Makieła
