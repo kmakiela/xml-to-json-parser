@@ -44,11 +44,13 @@ class XMLParser(object):
             for line in xml_input:
                 parsed_line = self.parse_line(line, keywords)
                 if parsed_line['keyword'] == keywords.object:
+                    if obj_ref is not None:
+                        raise XMLError("Objects cannot be nested")
                     obj_ref = XMLObject()
                 elif parsed_line['keyword'] == keywords.object_end:
                     if self.validate_object(obj_ref):
                         self.objects.append(obj_ref)
-                        obj_ref = None
+                    obj_ref = None
                 elif parsed_line['keyword'] == keywords.obj_name:
                     obj_ref.obj_name = parsed_line['argument']
                 elif parsed_line['keyword'] == keywords.field:
@@ -66,10 +68,7 @@ class XMLParser(object):
                     field_ref.value = parsed_line['argument']
                 else:
                     pass
-        for obj in self.objects:
-            print(obj)
-            for fields in obj.fields:
-                print(fields)
+        return self.objects
 
     def validate_field_type(self, f_type):
         return f_type == "int" or f_type == "string"
@@ -111,7 +110,8 @@ class XMLParser(object):
             return result
 
 
-
+class XMLError(Exception):
+    pass
 
 
 
