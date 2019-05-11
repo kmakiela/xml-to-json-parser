@@ -38,5 +38,4 @@ class JSONConverter:
                     output_file.write(",\n")
                 else:
                     output_file.write("\n")
-
             output_file.write("}")
